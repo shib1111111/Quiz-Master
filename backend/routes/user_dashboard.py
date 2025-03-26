@@ -300,8 +300,7 @@ def get_quiz_questions(quiz_id):
     except Exception as e:
         return jsonify({'msg': f'Error retrieving questions: {str(e)}'}), 500
 
-@user_dashboard_bp.route('/dashboard/user/quiz/<int:quiz_id>/attempt/<int:attempt_id>/question/<int:question_id>', 
-                       methods=['POST'])
+@user_dashboard_bp.route('/dashboard/user/quiz/<int:quiz_id>/attempt/<int:attempt_id>/question/<int:question_id>', methods=['POST'])
 @jwt_required()
 @user_required()
 def save_question_attempt(quiz_id, attempt_id, question_id):

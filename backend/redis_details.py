@@ -45,9 +45,11 @@ def print_used_redis_databases():
         print(f"Error: Redis not running at {REDIS_HOST}:{REDIS_PORT} - {e}")
     except Exception as e:
         print(f"Error: {e}")
+        
     finally:
         r.close()
 
 
 if __name__ == "__main__":
+    
     print_used_redis_databases()
