@@ -68,7 +68,7 @@
               class="form-control me-2 search-input"
               type="search"
               placeholder="Type to search..."
-              aria-label="Search"
+              aria-label="Search" 
             >
             <button class="btn btn-outline-primary" type="submit">Search</button>
           </form>
