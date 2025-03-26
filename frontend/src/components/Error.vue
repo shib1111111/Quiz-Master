@@ -1,12 +1,16 @@
 <template>
     <div class="error-page">
+      <Navbar />
       <h1>404</h1>
       <p>Oops! The page you're looking for doesn't exist.</p>
       <router-link to="/">Go to Home</router-link>
     </div>
   </template>
-  
-  <script setup>
+  <script>
+  import Navbar from '@/components/Navbar.vue';
+  export default {
+    components: { Navbar },   
+    }
   </script>
   
   <style scoped>
