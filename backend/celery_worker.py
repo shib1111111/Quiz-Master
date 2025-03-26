@@ -19,7 +19,6 @@ def make_celery(app):
     celery.Task = ContextTask
     return celery
 
-
 celery_app = make_celery(app)
 import celery_tasks
 # print(celery_app.tasks)  # Should include 'send_reset_email'

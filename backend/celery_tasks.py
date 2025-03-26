@@ -30,7 +30,6 @@ def send_reset_password_success_email(recipient_email):
         sender="shibkumar1002@gmail.com",  # Update with your sender email
         recipients=[recipient_email]
     )
-    
     email_message.body = (
         f"Your password has been successfully reset.\n\n"
         f"If you didn’t reset your password, please contact support."

@@ -24,7 +24,6 @@ class Config:
     except KeyError as e:
         raise KeyError(f"Missing required environment variable: {e}")
 
-
     # JWT Authentication
     try:
         JWT_SECRET_KEY = os.environ["JWT_SECRET_KEY"]
