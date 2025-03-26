@@ -245,6 +245,7 @@ export default {
         this.alertType = 'error';
       }
     },
+    
     async startQuiz(quizId) {
       try {
         const response = await axios.post(`${BASE_URL}/dashboard/user/quiz/${quizId}/open_instructions`, {}, {

@@ -593,6 +593,7 @@ def log_tab_switch(quiz_id, attempt_id):
             db.session.commit()
             return jsonify({'msg': 'Exam ended due to multiple tab switches'}), 403
 
+
         db.session.commit()
         return jsonify({'msg': 'Tab switch warning logged', 'warning_count': warning_count}), 200
     

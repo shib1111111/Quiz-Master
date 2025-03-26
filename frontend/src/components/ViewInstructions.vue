@@ -225,6 +225,7 @@ export default {
   color: #e74c3c;
 }
 
+
 @media (max-width: 768px) {
   .instructions-container {
     padding: 15px;
