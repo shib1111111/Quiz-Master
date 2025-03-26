@@ -432,6 +432,7 @@ def submit_exam(quiz_id, attempt_id):
             event_type='MARK_FOR_REVIEW'
         ).count()
 
+
         event_log = QuizEventLog(
             user_id=current_user.id,
             quiz_attempt_id=attempt_id,
