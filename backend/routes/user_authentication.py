@@ -87,6 +87,7 @@ def user_login():
         cache.set(f"user_{user.id}_access", access_token, timeout=JWT_ACCESS_TOKEN_EXPIRES)
         cache.set(f"user_{user.id}_refresh", refresh_token, timeout=JWT_REFRESH_TOKEN_EXPIRES)
         
+        
         # Log user login activity
         try:
             system_info = get_system_info(request)

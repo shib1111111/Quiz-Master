@@ -22,6 +22,7 @@ def refresh():
     return jsonify(access_token=new_token), 200
 
 
+
 def generate_otp(length=6):
     digits = string.digits
     return ''.join(random.choice(digits) for _ in range(length))
