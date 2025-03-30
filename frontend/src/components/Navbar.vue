@@ -18,7 +18,6 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <!-- Navbar content -->
       <div class="collapse navbar-collapse" id="navbarContent">
         <!-- Admin Navbar Links -->

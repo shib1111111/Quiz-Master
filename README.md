@@ -15,6 +15,7 @@ Quiz Master is a robust, single-page application (SPA) designed for exam prepara
 - **Authentication**: JWT (JSON Web Tokens) secures endpoints, assigning tokens to distinguish Admin and User roles.
 - **Request-Response**: Axios sends requests (e.g., GET for quiz data, POST for submissions) and processes JSON responses from Flask APIs.
 
+
 ## Roles and Functionalities
 
 ### Admin (Quiz Master)

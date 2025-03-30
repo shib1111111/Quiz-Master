@@ -5,6 +5,7 @@
           <h3>{{ title }}</h3>
         </div>
         
+        
         <div class="card-body">
           <div class="row row-cols-1 row-cols-md-3 g-3">
             <div v-for="quiz in quizzes" :key="quiz.quiz_id" class="col">

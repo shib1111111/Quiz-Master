@@ -17,6 +17,7 @@
             </div>
           </div>
 
+          
           <!-- Subject Mastery (Bar Chart) -->
           <div class="col-lg-6 col-md-12">
             <div class="card chart-card">

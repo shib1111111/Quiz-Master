@@ -18,6 +18,7 @@
           </div>
           <button class="btn btn-sm btn-success" @click="downloadAll">Download All Data</button>
         </div>
+        
 
         <div v-if="Object.keys(scores.subjects).length === 0" class="text-muted text-center py-4">
           No quiz scores available yet!
