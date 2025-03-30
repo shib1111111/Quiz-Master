@@ -17,6 +17,7 @@
               Log in to test your knowledge and compete with others!
             </p>
           </div>
+          
         </div>
         <div class="col-md-6 right-section">
           <div class="login-form">

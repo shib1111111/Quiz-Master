@@ -21,6 +21,7 @@
             </p>
           </div>
         </div>
+        
 
         <!-- Right section: Signup form -->
         <div class="col-md-6 right-section">

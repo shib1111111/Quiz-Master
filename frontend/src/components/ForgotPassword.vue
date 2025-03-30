@@ -18,6 +18,7 @@
               No worries! Request an OTP to unlock your quiz journey.
             </p>
           </div>
+          
         </div>
         <div class="col-md-6 right-section">
           <div class="forgot-password-form">
