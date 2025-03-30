@@ -70,3 +70,4 @@ def get_quiz_metadata(quiz_id):
     }
     return jsonify({'quiz_metadata': metadata})
 
+

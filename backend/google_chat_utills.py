@@ -14,7 +14,6 @@ def send_group_msg_google_chat_space(message: str, webhook_url: str = GOOGLE_CHA
     print(f"Webhook URL: {webhook_url}")
     if not webhook_url or not message:
         return {"success": False, "error": "Webhook URL and message cannot be empty!", "timestamp": None, "message": message}
-    
     headers = {"Content-Type": "application/json"}
     payload = {"text": message}
     

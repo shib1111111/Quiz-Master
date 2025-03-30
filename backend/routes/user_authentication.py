@@ -11,6 +11,7 @@ from setup_cache import cache
 import random
 import string
 
+
 user_auth_bp = Blueprint('user_authentication', __name__)
 
 

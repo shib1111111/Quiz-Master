@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 
 user_summary_bp = Blueprint('user_summary', __name__)
 
+
 @user_summary_bp.route('/dashboard/user/scores', methods=['GET'])
 @jwt_required()
 @user_required()

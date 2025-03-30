@@ -37,6 +37,7 @@ class Config:
     except KeyError as e:
         raise KeyError(f"Missing required environment variable: {e}")
 
+
     # Redis Cache
     try:
         CACHE_TYPE = os.environ["CACHE_TYPE"]

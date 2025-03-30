@@ -20,6 +20,7 @@
     >
       Begin Quiz
     </button>
+    
     <div v-if="alertMessage" :class="['alert', alertType]">{{ alertMessage }}</div>
   </div>
 </template>

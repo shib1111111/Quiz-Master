@@ -19,6 +19,7 @@
         </label>
       </div>
     </div>
+    
     <div class="sidebar">
       <div class="timer">
         Time Remaining: <span class="time">{{ timeRemaining }}</span>

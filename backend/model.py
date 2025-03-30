@@ -208,7 +208,7 @@ class UserActivity(db.Model):
 # QuizEventLog Model (user-generated)
 class QuizEventLog(db.Model):
     __tablename__ = 'quiz_event_logs'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, index=True)
     quiz_attempt_id = db.Column(db.Integer, db.ForeignKey('quiz_attempts.id', ondelete='CASCADE'), nullable=False, index=True)

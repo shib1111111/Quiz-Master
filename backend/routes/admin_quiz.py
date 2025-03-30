@@ -5,6 +5,7 @@ from model import db, Subject, Chapter, Quiz, Question
 from api_utils import get_current_user
 from datetime import datetime
 
+
 admin_quiz_bp = Blueprint('admin_quiz', __name__)
 
 @admin_quiz_bp.route('/chapters/<int:chapter_id>/quizzes', methods=['GET'])

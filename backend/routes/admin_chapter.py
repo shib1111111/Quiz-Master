@@ -6,6 +6,7 @@ from api_utils import get_current_user, get_current_ist
 
 admin_chapter_bp = Blueprint('admin_chapter', __name__)
 
+
 @admin_chapter_bp.route('/subjects/<int:subject_id>/chapters', methods=['GET'])
 @jwt_required()
 @admin_required()

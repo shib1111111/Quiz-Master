@@ -18,7 +18,6 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!-- Navbar content -->
       <div class="collapse navbar-collapse" id="navbarContent">
         <!-- Admin Navbar Links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="role === 'admin' && isAuthenticated">

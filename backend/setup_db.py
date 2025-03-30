@@ -27,5 +27,4 @@ with app.app_context():
         print(f"Admin '{admin_username}' created successfully.")
     else:
         print(f"Admin '{admin_username}' already exists, skipping creation.")
-
     print("Database setup complete.")

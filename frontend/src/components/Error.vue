@@ -12,7 +12,6 @@
     components: { Navbar },   
     }
   </script>
-
   <style scoped>
   .error-page {
     display: flex;

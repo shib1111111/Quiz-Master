@@ -37,6 +37,5 @@ def print_used_redis_databases():
     finally:
         r.close()
 
-
 if __name__ == "__main__":
     print_used_redis_databases()

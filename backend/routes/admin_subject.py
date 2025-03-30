@@ -100,3 +100,4 @@ def delete_subject(subject_id):
         db.session.rollback()
         return jsonify({"error": f"Failed to delete subject: {str(e)}"}), 500
 
+

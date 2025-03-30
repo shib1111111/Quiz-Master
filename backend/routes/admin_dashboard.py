@@ -6,6 +6,7 @@ from flask_jwt_extended import get_jwt, get_jwt_identity
 from api_utils import get_current_user, get_current_ist
 from datetime import datetime
 
+
 admin_dashboard_bp = Blueprint('admin_dashboard', __name__)
 
 @admin_dashboard_bp.route('/dashboard/admin', methods=['GET'])

@@ -18,6 +18,7 @@
             </p>
           </div>
         </div>
+        
         <div class="col-md-6 right-section">
           <div class="reset-password-form">
             <h2 class="form-title">Reset Password</h2>

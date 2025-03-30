@@ -238,3 +238,5 @@ def admin_reset_password():
     except Exception as e:
         db.session.rollback()
         return jsonify({"msg": f"Error during password reset: {str(e)}"}), 500
+    
+    

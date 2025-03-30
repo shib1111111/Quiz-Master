@@ -16,8 +16,6 @@ import UserScore from '../components/UserScore.vue';
 import UserSummary from '../components/UserSummary.vue';
 import store from '@/store';
 
-
-
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/:pathMatch(.*)*', name: 'Error', component: Error },

@@ -39,7 +39,7 @@ def get_admin_summary():
         # 3. Monthly Engagement
         monthly_attempts = {}
         for attempt in quiz_attempts:
-            month = attempt.quiz_start_time.month if attempt.quiz_start_time else get_ist_datetime().month
+            month = attempt.quiz_start_time.month if attempt.quiz_start_time else get_current_ist().month
             monthly_attempts[month] = monthly_attempts.get(month, 0) + 1
         
         # 4. Subject Performance

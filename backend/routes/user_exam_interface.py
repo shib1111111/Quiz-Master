@@ -613,3 +613,4 @@ def delete_answer(quiz_id, attempt_id, question_id):
         db.session.rollback()
         return jsonify({'msg': f'Error deleting answer: {str(e)}'}), 500
     
+

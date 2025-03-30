@@ -65,6 +65,7 @@ export default {
   transform: translateX(2in);
   opacity: 0;
 }
+
 .slide-enter-to,
 .slide-leave-from {
   transform: translateX(0);

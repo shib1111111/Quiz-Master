@@ -142,6 +142,7 @@ def get_quiz_attempts(quiz_id):
                 'Pass' if score_percentage >= 25 else
                 'Fail'
             )
+            
             results.append({
                 'attempt_id': qa.id,
                 'score': qa.total_score_earned,

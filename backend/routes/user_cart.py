@@ -73,6 +73,7 @@ def get_cart():
         'stripe_public_key': STRIPE_PUBLIC_KEY  
     })
 
+
 # Remove quiz from cart
 @user_cart_bp.route('/dashboard/user/cart/<int:cart_id>/remove', methods=['DELETE'])
 @jwt_required()

@@ -17,6 +17,7 @@
         <i class="bi bi-cart-x" style="font-size: 3rem;"></i>
         <p>Your cart is empty. <router-link to="/user-dashboard">Explore quizzes now!</router-link></p>
       </div>
+      
       <div v-else class="cart-wrapper">
         <div class="list-group cart-list">
           <div v-for="(item, index) in cartItems" :key="item.quiz_id" class="list-group-item quiz-item">

@@ -30,6 +30,7 @@ def get_questions(quiz_id):
     except Exception as e:
         return jsonify({"error": f"Failed to fetch questions: {str(e)}"}), 500
 
+
 @admin_question_bp.route('/quizzes/<int:quiz_id>/questions', methods=['POST'])
 @jwt_required()
 @admin_required()
