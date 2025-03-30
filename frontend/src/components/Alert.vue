@@ -14,7 +14,7 @@ export default {
   props: {
     message: { type: String, default: '' },
     type: { type: String, default: 'info' }, // 'error', 'success', 'warning', 'info'
-    duration: { type: Number, default: 3000 }, // ms, 0 to disable auto-dismiss
+    duration: { type: Number, default: 3000 }, 
     dismissible: { type: Boolean, default: true }
   },
   emits: ['close'],
@@ -57,7 +57,6 @@ export default {
 
 
 <style scoped>
-/* Slide transition: the alert starts 2 inches to the right */
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 0.5s ease, opacity 0.5s ease;
@@ -72,14 +71,10 @@ export default {
   transform: translateX(0);
   opacity: 1;
 }
-
-/* Basic alert styling */
 .alert {
   position: relative;
-  padding-right: 3rem; /* Reserve space for the close button */
+  padding-right: 3rem; 
 }
-
-/* Styling for the close ("X") button */
 .close {
   position: absolute;
   top: 0;

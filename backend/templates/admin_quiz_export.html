@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users Quiz Data Export</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 20px;
+        }
+        .greeting {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .instructions {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+            margin: 0 0 15px;
+        }
+        .footer {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+        }
+        .footer p {
+            margin: 0;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Quiz Master</h1>
+        </div>
+        <div class="content">
+            <p class="greeting">Dear Administrator,</p>
+            <div class="message">{{ message }}</div>
+            {% if has_quiz_attempts %}
+                <p class="instructions">
+                    Attached to this email is a CSV file containing a comprehensive report of all users' quiz activities under your management. 
+                    Should you encounter any issues or require further assistance, please don’t hesitate to reach out to our support team
+                </p>
+            {% else %}
+                <p class="instructions">
+                    It appears there are no quiz records available for users at this time. A CSV file reflecting this status is attached for your reference. 
+                    If you have any questions or need assistance, feel free to contact our support team
+                </p>
+            {% endif %}
+        </div>
+        <div class="footer">
+            <p>© 2025 Quiz Master. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

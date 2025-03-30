@@ -11,6 +11,9 @@ import AdminSummary from '@/components/AdminSummary.vue';
 import QuizCart from '../components/QuizCart.vue';
 import ViewInstructions from '../components/ViewInstructions.vue';
 import ExamInterface from '../components/ExamInterface.vue';
+import Success from '../components/Success.vue';
+import UserScore from '../components/UserScore.vue';
+import UserSummary from '../components/UserSummary.vue';
 import store from '@/store';
 
 
@@ -23,12 +26,15 @@ const routes = [
   { path: '/forgot-password', component: ForgotPassword },
   { path: '/reset-password', component: ResetPassword },
   { path: '/admin-dashboard',component: AdminDashboard,beforeEnter: (to, from, next) => {if (store.state.role !== 'admin') next('/login'); else next();}},
-  { path: '/admin/quiz', component: AdminQuiz, meta: { requiresAuth: true, adminOnly: true } },
-  { path: '/admin/summary', component: AdminSummary, meta: { requiresAuth: true, adminOnly: true } },
+  { path: '/admin/quiz', component: AdminQuiz, meta: { requiresAuth: true, adminOnly: true },beforeEnter: (to, from, next) => {if (store.state.role !== 'admin') next('/login'); else next();}},
+  { path: '/admin/summary', component: AdminSummary, meta: { requiresAuth: true, adminOnly: true } ,beforeEnter: (to, from, next) => {if (store.state.role !== 'admin') next('/login'); else next();}},
   { path: '/user-dashboard',component: UserDashboard,beforeEnter: (to, from, next) => {if (store.state.role !== 'user') next('/login');else next();}},
   { path: '/cart',component: QuizCart,beforeEnter: (to, from, next) => {if (store.state.role !== 'user') next('/login');else next();}},
+  {path: '/cart/success',component: Success,beforeEnter: (to, from, next) => {if (store.state.role !== 'user' || !store.state.access_token) next('/login');else next();},},
   {path: '/quiz/:quizId/attempt/:attemptId/instructions',component: ViewInstructions,props: true,beforeEnter: (to, from, next) => {if (store.state.role !== 'user') next('/login');else next();}},
-  { path: '/quiz/:quizId/attempt/:attemptId/exam', component: ExamInterface, props: true,beforeEnter: (to, from, next) => { if (!store.state.access_token) next('/login'); else next();}}
+  {path:'/user-score',component:UserScore,beforeEnter: (to, from, next) => {if (store.state.role !== 'user') next('/login');else next();}},
+  { path: '/quiz/:quizId/attempt/:attemptId/exam', component: ExamInterface, props: true,beforeEnter: (to, from, next) => { if (!store.state.access_token) next('/login'); else next();}},
+  {path: '/user-summary',component: UserSummary,beforeEnter: (to, from, next) => {if (store.state.role !== 'user') next('/login');else next();}},
 ];
 
 const router = createRouter({

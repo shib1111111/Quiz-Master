@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Daily Quiz Master Update</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .header { background-color: #4CAF50; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 28px; }
+        .content { padding: 20px; }
+        .greeting { font-size: 18px; color: #333; }
+        .inactive-message { background-color: #FFF3E0; padding: 15px; border-left: 5px solid #FF5722; color: #FF5722; font-weight: bold; margin-bottom: 20px; }
+        .section { margin-bottom: 30px; }
+        .section h2 { color: #4CAF50; font-size: 22px; margin-bottom: 10px; }
+        .quiz-item { background-color: #f9f9f9; padding: 10px; margin-bottom: 10px; border-left: 5px solid #4CAF50; }
+        .quiz-item strong { color: #333; }
+        .cta { text-align: center; margin: 20px 0; }
+        .cta a { display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .footer { background-color: #f4f4f4; padding: 10px; text-align: center; font-size: 12px; color: #777; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Quiz Master</h1>
+        </div>
+        <div class="content">
+            <p class="greeting">Dear {{ full_name }},</p>
+            
+            {% if inactive %}
+                <div class="inactive-message">
+                    We miss you! It’s been a while since your last visit. Come back and dive into some exciting quizzes waiting for you!
+                </div>
+            {% endif %}
+            
+            {% if new_free_quizzes or new_paid_quizzes %}
+                <div class="section">
+                    <h2>🎉 Fresh Quizzes Just For You!</h2>
+                    {% if new_free_quizzes %}
+                        <p>Explore these new free challenges:</p>
+                        {% for quiz in new_free_quizzes %}
+                            <div class="quiz-item">
+                                <strong>{{ quiz.subject }}</strong> - {{ quiz.chapter }}<br>
+                                {{ quiz.name }} | Level: {{ quiz.level }} | {{ quiz.amount }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if new_paid_quizzes %}
+                        <p>Unlock premium fun with these new paid quizzes:</p>
+                        {% for quiz in new_paid_quizzes %}
+                            <div class="quiz-item">
+                                <strong>{{ quiz.subject }}</strong> - {{ quiz.chapter }}<br>
+                                {{ quiz.name }} | Level: {{ quiz.level }} | {{ quiz.amount }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            {% if endorse_free_quizzes or endorse_paid_quizzes %}
+                <div class="section">
+                    <h2>💎 Hidden Gems We Think You’ll Love</h2>
+                    {% if endorse_free_quizzes %}
+                        <p>Try these free underplayed quizzes:</p>
+                        {% for quiz in endorse_free_quizzes %}
+                            <div class="quiz-item">
+                                <strong>{{ quiz.subject }}</strong> - {{ quiz.chapter }}<br>
+                                {{ quiz.name }} | Level: {{ quiz.level }} | {{ quiz.amount }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if endorse_paid_quizzes %}
+                        <p>Elevate your skills with these premium picks:</p>
+                        {% for quiz in endorse_paid_quizzes %}
+                            <div class="quiz-item">
+                                <strong>{{ quiz.subject }}</strong> - {{ quiz.chapter }}<br>
+                                {{ quiz.name }} | Level: {{ quiz.level }} | {{ quiz.amount }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            <div class="cta">
+                <a href="#">Jump In Now!</a>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 Quiz Master. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

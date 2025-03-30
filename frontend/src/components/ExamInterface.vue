@@ -66,9 +66,6 @@
     <div v-if="examEnded" class="modal">
       <div class="modal-content ended">
         <h3>Exam Ended</h3>
-        <p>{{ endReason }}</p>
-        <p>Score: {{ examResults.total_score_earned }} / {{ totalScorePossible }}</p>
-        <p>Correct: {{ examResults.total_correct_ans }} / {{ questions.length }}</p>
         <button @click="exitExam" class="btn btn-primary">Exit</button>
       </div>
     </div>
@@ -279,27 +276,40 @@ export default {
       }
     },
     setupTabMonitoring() {
-      this.handleTabSwitch = async () => {
-        if (this.examEnded) return;
-        this.warningCount++;
-        try {
-          const response = await axios.post(
-            `${BASE_URL}/dashboard/user/quiz/${this.quizId}/attempt/${this.attemptId}/tab-switch`,
-            { access_token: this.accessToken },
-            { headers: { Authorization: `Bearer ${this.$store.state.access_token}` } }
-          );
-          if (this.warningCount <= 3) {
-            this.showWarning = true;
-          }
-          if (this.warningCount > 3) {
-            this.endExam('Tab switch limit exceeded');
-          }
-        } catch (error) {
-          console.error('Tab switch logging failed:', error);
+  this.handleTabSwitch = async () => {
+    if (this.examEnded) return;
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/dashboard/user/quiz/${this.quizId}/attempt/${this.attemptId}/tab-switch`,
+        { access_token: this.accessToken },
+        { headers: { Authorization: `Bearer ${this.$store.state.access_token}` } }
+      );
+      // Update local warning count from backend response
+      this.warningCount = response.data.warning_count;
+
+      // Show warning modal if the exam hasn't ended
+      if (this.warningCount <= 3) {
+        this.showWarning = true;
+      }
+    } catch (error) {
+      // Handle 403 error when exam ends due to tab switches
+      if (error.response && error.response.status === 403) {
+        if (error.response.data.msg === 'Exam ended due to multiple tab switches') {
+          await this.endExam('Tab switch limit exceeded');
+        } else if (error.response.data.msg === 'Valid access token required') {
+          await this.endExam('Invalid access token');
+        } else {
+          console.error('Unexpected 403 error:', error.response.data);
+          await this.endExam('Unauthorized access');
         }
-      };
-      window.addEventListener('blur', this.handleTabSwitch);
-    },
+      } else {
+        console.error('Tab switch logging failed:', error);
+      }
+    }
+  };
+  window.addEventListener('blur', this.handleTabSwitch);
+},
     exitExam() {
       this.$router.push('/user-dashboard');
     }

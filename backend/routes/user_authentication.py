@@ -3,9 +3,9 @@ from datetime import timedelta
 from flask import Blueprint, request, jsonify,current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity,verify_jwt_in_request,decode_token,create_refresh_token
-from model import db, User, Admin, UserActivity  # Ensure your model file defines these models and the get_current_ist function for timestamps
-from setup_cache import cache  # Global cache instance
-from api_utils import get_system_info  # Import our helper function
+from model import db, User, Admin, UserActivity 
+from setup_cache import cache  
+from api_utils import get_system_info  
 from functools import wraps
 from setup_cache import cache
 import random
@@ -216,7 +216,7 @@ def user_forgot_password_user():
         if user.email:
             from celery_tasks import send_reset_password_email
             send_reset_password_email.delay(user.email, otp)
-            return jsonify({"msg": "OTP generated and emailed."}), 200
+        return jsonify({"msg": "OTP generated and emailed."}), 200
         # else:
         #     # For browser-based flows without email, return the OTP directly
         #     return jsonify({"msg": "OTP generated.", "otp": otp}), 200

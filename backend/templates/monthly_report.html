@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Activity Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; margin: 0; }
+        .container { max-width: 600px; margin: 20px auto; padding: 20px; }
+        .header { background-color: #4CAF50; color: white; padding: 15px; text-align: center; }
+        .content { padding: 20px; }
+        .section { margin-bottom: 30px; }
+        h2 { color: #4CAF50; border-bottom: 2px solid #4CAF50; padding-bottom: 5px; font-size: 22px; }
+        h3 { font-size: 18px; margin: 10px 0; }
+        p { line-height: 1.6; }
+        
+        /* Table Styles */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .summary-table th, .summary-table td { text-align: center; }
+        .attempts-table th, .attempts-table td { padding: 5px; font-size: 14px; }
+        
+        /* Quiz Item Styling */
+        .quiz-item { background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        
+        /* Call to Action */
+        .cta { text-align: center; margin-top: 20px; }
+        .cta a { background-color: #4CAF50; color: white; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 5px; display: inline-block; }
+        
+        /* Footer */
+        .footer { text-align: center; font-size: 12px; color: #777; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Quiz Master</h1>
+            <h2>Activity Report for {{ report_month }}</h2>
+        </div>
+        <div class="content">
+            <p><strong>Dear {{ full_name }},</strong></p>
+            <p>We hope you're enjoying your learning journey! Here’s your activity report for {{ report_month }}:</p>
+
+            <!-- Monthly Summary -->
+            <div class="section">
+                <h2>Monthly Summary</h2>
+                <table class="summary-table">
+                    <tr><th>Metric</th><th>Value</th></tr>
+                    <tr><td>Unique Quizzes Attempted</td><td><strong>{{ unique_quizzes_attempted }}</strong></td></tr>
+                    <tr><td>Total Quiz Attempts</td><td><strong>{{ total_attempts }}</strong></td></tr>
+                    <tr><td>Total Quizzes Purchased</td><td><strong>{{ total_quizzes_purchased }}</strong></td></tr>
+                    <tr><td>Total Amount Spent</td><td><strong>{{ total_amount_spent }} Coins</strong></td></tr>
+                </table>
+            </div>
+
+            <!-- Quiz Performance -->
+            <div class="section">
+                <h2>Quiz Performance</h2>
+                {% for quiz_id, data in quiz_details.items() %}
+                    <div class="quiz-item">
+                        <h3>Quiz #{{ quiz_id }} - {{ data.subject_name }} - {{ data.chapter_name }} ({{ 'Paid' if data.pay_required else 'Free' }})</h3>
+                        <p><strong>Attempts:</strong> {{ data.num_attempts }}</p>
+                        <p><strong>Highest Score:</strong> {{ data.highest_score }}</p>
+                        <p><strong>Average Score:</strong> {{ data.average_score | round(2) }}</p>
+                        <table class="attempts-table">
+                            <tr><th>Attempt Date</th><th>Score</th></tr>
+                            {% for attempt in data.attempts %}
+                                <tr><td>{{ attempt.date }}</td><td>{{ attempt.score }}</td></tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Purchases -->
+            <div class="section">
+                <h2>Purchases</h2>
+                {% if purchases %}
+                    <table>
+                        <tr><th>Quiz ID</th><th>Amount Paid</th></tr>
+                        {% for purchase in purchases %}
+                            <tr><td>Quiz #{{ purchase.quiz_id }}</td><td><strong>{{ purchase.amount_paid }} Coins</strong></td></tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>No purchases made this month.</p>
+                {% endif %}
+            </div>
+
+            <!-- Performance by Subject -->
+            <div class="section">
+                <h2>Performance by Subject</h2>
+                <table>
+                    <tr><th>Subject</th><th>Average Score</th></tr>
+                    {% for subject, avg_score in subject_performance.items() %}
+                        <tr><td>{{ subject }}</td><td><strong>{{ avg_score | round(2) }}</strong></td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <!-- Performance by Chapter -->
+            <div class="section">
+                <h2>Performance by Chapter</h2>
+                <table>
+                    <tr><th>Chapter</th><th>Average Score</th></tr>
+                    {% for chapter, avg_score in chapter_performance.items() %}
+                        <tr><td>{{ chapter }}</td><td><strong>{{ avg_score | round(2) }}</strong></td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <p>Keep up the great work and explore more quizzes to enhance your knowledge!</p>
+            <div class="cta">
+                <a href="#">Continue Learning!</a>
+            </div>
+        </div>
+        <div class="footer">
+            <p>© 2025 Quiz Master. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

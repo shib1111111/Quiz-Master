@@ -365,7 +365,6 @@ export default {
 </script>
 
 <style scoped>
-/* Base styles */
 .container-fluid {
   padding: 0 20px;
 }

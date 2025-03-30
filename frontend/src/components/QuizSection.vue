@@ -15,7 +15,7 @@
                     <span class="quiz-info questions">Questions: {{ quiz.number_of_questions }}</span>
                     <span class="quiz-info date">Date: {{ quiz.date }}</span>
                     <span class="quiz-info duration">Duration: {{ quiz.duration }}</span>
-                    <span class="quiz-info price"><strong>Price:</strong> ${{ quiz.pay_amount || '0.00' }}</span> <!-- Changed from price -->
+                    <span class="quiz-info price"><strong>Price:</strong> ₹{{ quiz.pay_amount || '0.00' }}</span> <!-- Changed from price -->
                   </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
@@ -54,7 +54,7 @@
     </div>
   </template>
   
-  <script>
+<script>
   export default {
     props: {
       title: String,
@@ -75,7 +75,7 @@
       },
     },
   };
-  </script>
+</script>
   
   <style scoped>
   .card-body {

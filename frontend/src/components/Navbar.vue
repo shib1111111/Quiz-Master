@@ -3,7 +3,7 @@
     <div class="container-fluid px-4">
       <!-- Brand/Logo -->
       <router-link class="navbar-brand fw-bold" :to="dashboardRoute">
-        <img src="@/assets/logo.svg" alt="MyApp Logo" class="favicon">
+        <img src="@/assets/logo.jpg" alt="MyApp Logo" class="favicon">
       </router-link>
 
       <!-- Toggle button for mobile -->
@@ -48,12 +48,19 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link nav-btn user-link" to="/user/scores" active-class="active">
+            <router-link class="nav-link nav-btn user-link" to="/user-score" active-class="active">
               Scores
             </router-link>
           </li>
+
           <li class="nav-item">
-            <router-link class="nav-link nav-btn user-link" to="/user/summary" active-class="active">
+            <router-link class="nav-link nav-btn user-link" to="/cart" active-class="active">
+              Cart
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link class="nav-link nav-btn user-link" to="/user-summary" active-class="active">
               Summary
             </router-link>
           </li>
@@ -73,14 +80,6 @@
             <button class="btn btn-outline-primary" type="submit">Search</button>
           </form>
 
-              <!-- Cart Button (Visible only for users) -->
-              <button
-              v-if="role === 'user' && isAuthenticated && cartCount > 0"
-              class="btn btn-success cart-btn me-3"
-              @click="$router.push('/cart')"
-              >
-              Cart ({{ cartCount }})
-              </button>
           <!-- Logout Button -->
           <button v-if="isAuthenticated" class="btn btn-danger logout-btn" @click="handleLogout">
             Logout
@@ -136,7 +135,7 @@ export default {
         this.cartCount = (response.data.cart_items || []).length;
       } catch (error) {
         console.error('Failed to fetch cart count:', error.response?.data || error.message);
-        this.cartCount = 0; // Default to 0 on error
+        this.cartCount = 0; 
       }
     },
     async handleLogout() {

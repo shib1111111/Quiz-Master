@@ -10,7 +10,6 @@ def make_celery(app):
     )
     celery.conf.update(app.config)
     
-    # Ensuring tasks have application context
     TaskBase = celery.Task
     class ContextTask(TaskBase):
         def __call__(self, *args, **kwargs):
@@ -21,6 +20,8 @@ def make_celery(app):
 
 celery_app = make_celery(app)
 import celery_tasks
-# print(celery_app.tasks)  # Should include 'send_reset_email'
+# print(celery_app.tasks)  
 
+# celery commandand to start the worker and beat scheduler
 # celery -A celery_worker.celery_app worker --pool=threads --loglevel=info
+# celery -A celery_worker.celery_app beat --loglevel=info

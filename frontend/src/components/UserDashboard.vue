@@ -51,7 +51,7 @@
             <p><strong>Date:</strong> {{ metadata.date }}</p>
             <p><strong>Duration:</strong> {{ metadata.duration }}</p>
             <p><strong>Difficulty:</strong> {{ metadata.overall_difficulty }}</p> <!-- Changed from difficulty -->
-            <p><strong>Price:</strong> ${{ metadata.pay_amount || '0.00' }}</p> <!-- Changed from price -->
+            <p><strong>Price:</strong> ₹{{ metadata.pay_amount || '0.00' }}</p> <!-- Changed from price -->
             <p v-if="metadata.in_cart" class="text-success fw-bold">In Cart - Go to Cart</p>
           </div>
           <div class="modal-footer">
@@ -239,6 +239,8 @@ export default {
         });
         this.alertMessage = response.data.msg;
         this.alertType = 'success';
+        // Update cart count using store action
+        await this.store.dispatch('updateCartCount');
         await this.fetchQuizzes(this.store.state.access_token);
       } catch (error) {
         this.alertMessage = error.response?.data.msg || 'Failed to add to cart.';

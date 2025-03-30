@@ -52,9 +52,9 @@
                 </div>
                 <div class="card-body d-flex flex-column">
                   <p class="mb-3 description">
-                    <span>Date: {{ quiz.date_of_quiz || 'Not Set' }}</span>
+                    <span><strong>Date: </strong>{{ quiz.date_of_quiz || 'Not Set' }}</span>
                     <span v-if="isPastDate(quiz.date_of_quiz)" class="badge bg-danger ms-2">
-                      Past Date - Edit Required
+                      Past Date
                     </span>
                     <span class="ms-2">|</span>
                     <span class="ms-2"><strong>Duration:</strong> <span :class="getDurationClass(quiz.time_duration)">{{ quiz.time_duration }} mins</span></span>
@@ -63,9 +63,9 @@
                     <span class="ms-2">|</span>
                     <span class="ms-2"><strong>Visibility:</strong> <span :class="quiz.visibility ? 'text-success' : 'text-danger'">{{ quiz.visibility ? 'Visible' : 'Hidden' }}</span></span>
                     <span class="ms-2">|</span>
-                    <span class="ms-2"><strong>Payment:</strong> 
+                    <span class="ms-2"><strong>Payment: </strong> 
                       <span :class="quiz.pay_required ? 'text-warning' : 'text-success'">
-                        {{ quiz.pay_required ? `Paid ($${quiz.pay_amount})` : 'Free' }}
+                        {{ quiz.pay_required ? `Paid (₹${quiz.pay_amount})` : 'Free' }}
                       </span>
                     </span>
                   </p>
@@ -185,7 +185,7 @@
                 </select>
               </div>
               <div class="mb-3" v-if="modalQuiz.pay_required">
-                <label class="form-label">Payment Amount ($)</label>
+                <label class="form-label">Payment Amount (₹)</label>
                 <input v-model="modalQuiz.pay_amount" type="number" step="0.01" min="0" class="form-control" required />
               </div>
               <button type="submit" class="btn btn-primary w-100">Save</button>
@@ -259,7 +259,9 @@ import { Modal } from 'bootstrap';
 import { reactive } from 'vue';
 
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}/api`;
-const CURRENT_DATE = new Date();
+// const CURRENT_DATE = new Date().toISOString().split('T')[0];
+const CURRENT_DATE = new Date(); 
+console.log(CURRENT_DATE);
 
 export default {
   components: { Alert, Navbar },
@@ -539,8 +541,9 @@ export default {
       }
     },
     isPastDate(date) {
-      if (!date) return false;
-      return new Date(date) < CURRENT_DATE;
+      const currentDateOnly = new Date(CURRENT_DATE.setHours(0, 0, 0, 0));
+      const quizDateOnly = new Date(new Date(date).setHours(0, 0, 0, 0));
+      return quizDateOnly < currentDateOnly; 
     },
     getDifficultyClass(difficulty) {
       switch (difficulty?.toLowerCase()) {

@@ -1,11 +1,11 @@
-# /routes/auth.py
+# /routes/admin_authentication.py
 from datetime import timedelta
 from flask import Blueprint, request, jsonify,current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity,verify_jwt_in_request,decode_token,create_refresh_token
-from model import db, Admin, UserActivity  # Ensure your model file defines these models and the get_current_ist function for timestamps
-from setup_cache import cache  # Global cache instance
-from api_utils import get_system_info  # Import our helper function
+from model import db, Admin, UserActivity 
+from setup_cache import cache  
+from api_utils import get_system_info  
 from functools import wraps
 from setup_cache import cache
 import random
@@ -82,14 +82,14 @@ def admin_logout():
     print("logout")
     try:
         admin_identity = get_jwt_identity() 
-        admin = Admin.query.filter_by(email=admin_identity).first()  # Use string directly
+        admin = Admin.query.filter_by(email=admin_identity).first()  
         if admin:
             cache.delete(f"admin_{admin.id}_access")
             try:
                 system_info = get_system_info(request)
                 new_activity = UserActivity(
                     user_id=admin.id,
-                    user_role="admin",  # Hardcoded or fetch from get_jwt()['role'] if needed
+                    user_role="admin",  
                     activity_type="logout",
                     client_ip=system_info.get("client_ip", "Unknown"),
                     mac_address=",".join(system_info.get("mac_addresses", [])),
@@ -172,7 +172,7 @@ def admin_forgot_password():
         if admin.email:
             from celery_tasks import send_reset_password_email
             send_reset_password_email.delay(admin.email, otp)
-            return jsonify({"msg": "OTP generated and emailed."}), 200
+        return jsonify({"msg": "OTP generated and emailed."}), 200
         # else:
         #     # For browser-based flows without email, return the OTP directly
         #     return jsonify({"msg": "OTP generated.", "otp": otp}), 200

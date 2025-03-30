@@ -31,7 +31,7 @@ class Config:
         JWT_COOKIE_SECURE = os.getenv("JWT_COOKIE_SECURE", "false").lower() == "true"
         JWT_HEADER_NAME = os.getenv("JWT_HEADER_NAME", "Authorization")
         JWT_HEADER_TYPE = os.getenv("JWT_HEADER_TYPE", "Bearer")
-        JWT_ACCESS_TOKEN_EXPIRES = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRES", 3600))  # Default: 1 hour
+        JWT_ACCESS_TOKEN_EXPIRES = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRES", 7200))  # Default: 2 hour
         JWT_REFRESH_TOKEN_EXPIRES = int(os.getenv("JWT_REFRESH_TOKEN_EXPIRES", 86400))  # Default: 1 day
         JWT_COOKIE_CSRF_PROTECT = os.getenv("JWT_COOKIE_CSRF_PROTECT")
     except KeyError as e:
@@ -64,15 +64,29 @@ class Config:
         MAIL_USE_TLS = os.getenv('MAIL_USE_TLS', 'False').lower() in ['true', '1', 't']
         MAIL_USERNAME = os.getenv('MAIL_USERNAME')
         MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+        SENDER_MAIL = os.getenv('SENDER_MAIL')
     except KeyError as e:
         raise KeyError(f"Missing required environment variable: {e}")
     
-    # Logging
     try:
-        LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
-        LOG_FILE = os.getenv("LOG_FILE", "app.log")
+        # Google Chat Webhook URL
+        GOOGLE_CHAT_WEBHOOK_URL = os.getenv("GOOGLE_CHAT_WEBHOOK_URL")
     except KeyError as e:
         raise KeyError(f"Missing required environment variable: {e}")
+    
+    try:
+        # Frontend URL for CORS
+        FRONTEND_URL = os.getenv("FRONTEND_URL")
+    except KeyError as e:
+        raise KeyError(f"Missing required environment variable: {e}")
+    
+    try:
+        # STRIPE Payment Gateway
+        STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+        STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY")
+    except KeyError as e:
+        raise KeyError(f"Missing required environment variable: {e}")
+        
 
 class DevelopmentConfig(Config):
     """Development Configuration"""
@@ -81,7 +95,7 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     """Production Configuration"""
     DEBUG = False
-    WTF_CSRF_ENABLED = True  # Enable CSRF protection in production (for admin panels, if needed)
+    WTF_CSRF_ENABLED = True  
 
 # Configuration selector based on environment
 def get_config():

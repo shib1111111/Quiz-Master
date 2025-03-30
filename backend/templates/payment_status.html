@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Status</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .header { background-color: #4CAF50; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 28px; }
+        .content { padding: 20px; }
+        .status-message { font-size: 18px; font-weight: bold; text-align: center; margin: 20px 0; }
+        .success { color: #4CAF50; }
+        .failed { color: #f44336; }
+        .details { font-size: 16px; color: #333; line-height: 1.5; }
+        .action-button { 
+            display: inline-block; 
+            padding: 10px 20px; 
+            margin: 10px 0; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            font-weight: bold;
+        }
+        .success-button { background-color: #4CAF50; color: white; }
+        .failed-button { background-color: #f44336; color: white; }
+        .footer { background-color: #f4f4f4; padding: 10px; text-align: center; font-size: 12px; color: #777; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Quiz Master</h1>
+        </div>
+        <div class="content">
+            <p class="details">Dear User,</p>
+            <div class="status-message {{ 'success' if payment_status == 'Completed' else 'failed' }}">
+                Your payment has been {{ payment_status }}!
+            </div>
+            
+            <p class="details">Transaction Details:</p>
+            <ul class="details">
+                <li>Transaction ID: {{ transaction_id }}</li>
+                <li>Quiz IDs: {{ quiz_ids|join(', ') }}</li>
+                <li>Date: {{ current_date }}</li>
+            </ul>
+
+            {% if payment_status == 'Completed' %}
+                <p class="details">
+                    Thank you for your purchase! Your payment was successfully processed, and you now have access to your quizzes.
+                </p>
+                <p class="details">
+                    Start exploring your quizzes now:
+                </p>
+                <a href="#" class="action-button success-button">Go to Dashboard</a>
+            {% else %}
+                <p class="details">
+                    Unfortunately, your payment attempt failed. This could be due to insufficient funds, an invalid card, or a temporary processing issue.
+                </p>
+                <p class="details">
+                    Please try again or contact support if the issue persists:
+                </p>
+                <a href="#" class="action-button failed-button">Try Again</a>
+                <p class="details">
+                    Need help? Reach out to our support team at support or call us.
+                </p>
+            {% endif %}
+        </div>
+        <div class="footer">
+            <p>© 2025 Quiz Master. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
