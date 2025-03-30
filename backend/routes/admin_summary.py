@@ -7,7 +7,6 @@ import pytz
 
 admin_summary_bp = Blueprint('admin_summary', __name__)
 
-
 @admin_summary_bp.route('/dashboard/admin/summary', methods=['GET'])
 @jwt_required()
 @admin_required()
