@@ -477,3 +477,4 @@ def setup_periodic_tasks(sender, **kwargs):
         name="send-quiz-endorsement-google-chat-notification"
     )
     
+    
