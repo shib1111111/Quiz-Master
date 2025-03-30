@@ -8,6 +8,7 @@ from datetime import datetime
 
 admin_quiz_bp = Blueprint('admin_quiz', __name__)
 
+# Routes for getting, creating, updating, and deleting quizzes
 @admin_quiz_bp.route('/chapters/<int:chapter_id>/quizzes', methods=['GET'])
 @jwt_required()
 @admin_required()
@@ -143,6 +144,7 @@ def update_quiz(quiz_id):
         db.session.rollback()
         return jsonify({"error": f"Failed to update quiz: {str(e)}"}), 500
     
+# Route to toggle quiz visibility and payment status
 @admin_quiz_bp.route('/quizzes/<int:quiz_id>/toggle_visibility', methods=['PATCH'])
 @jwt_required()
 @admin_required()
@@ -172,6 +174,7 @@ def toggle_quiz_payment(quiz_id):
         db.session.rollback()
         return jsonify({"error": f"Failed to toggle payment status: {str(e)}"}), 500
     
+# Route to delete a quiz
 @admin_quiz_bp.route('/quizzes/<int:quiz_id>', methods=['DELETE'])
 @jwt_required()
 @admin_required()

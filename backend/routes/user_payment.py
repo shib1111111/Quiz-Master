@@ -17,7 +17,7 @@ user_payment_bp = Blueprint('user_payment', __name__)
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 
-
+# Route to initiate checkout for quizzes in the cart
 @user_payment_bp.route('/dashboard/user/cart/purchase', methods=['POST'])
 @jwt_required()
 @user_required()

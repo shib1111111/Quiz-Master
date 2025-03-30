@@ -7,6 +7,7 @@ from api_utils import get_current_user, get_current_ist
 admin_subject_bp = Blueprint('admin_subject', __name__)
 
    
+# Routes for getting, creating, updating, and deleting subjects
 @admin_subject_bp.route('/subjects', methods=['GET'])
 @jwt_required()
 @admin_required()

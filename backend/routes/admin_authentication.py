@@ -13,7 +13,7 @@ import string
 
 admin_auth_bp = Blueprint('admin_authentication', __name__)
 
-
+# Route for generating refresh tokens
 @admin_auth_bp.route('/refresh', methods=['POST'])
 @jwt_required(refresh=True)
 def refresh():
@@ -22,11 +22,12 @@ def refresh():
     return jsonify(access_token=new_token), 200
 
 
-
+# Function to generate a random OTP
 def generate_otp(length=6):
     digits = string.digits
     return ''.join(random.choice(digits) for _ in range(length))
 
+# Route for admin registration
 @admin_auth_bp.route('/login/admin', methods=['POST'])
 def admin_login():
     try:
@@ -76,6 +77,7 @@ def admin_login():
     except Exception as e:
         return jsonify({"msg": f"An error occurred during admin login: {str(e)}"}), 500
 
+# Route for admin logout
 @admin_auth_bp.route('/logout/admin', methods=['POST'])
 @jwt_required()
 def admin_logout():
@@ -108,7 +110,8 @@ def admin_logout():
         return jsonify({"msg": "Admin logged out successfully."}), 200
     except Exception as e:
         return jsonify({"msg": f"Error during logout: {str(e)}"}), 500
-    
+   
+# Routes for password recovery using OTP 
 @admin_auth_bp.route('/forgot_password/admin', methods=['POST'])
 def admin_forgot_password():
     try:
@@ -181,6 +184,7 @@ def admin_forgot_password():
         return jsonify({"msg": f"Error generating OTP: {str(e)}"}), 500
     
     
+# Routes for resetting password using OTP
 @admin_auth_bp.route('/reset_password/admin', methods=['POST'])
 def admin_reset_password():
     try:

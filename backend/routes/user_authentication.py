@@ -14,7 +14,7 @@ import string
 
 user_auth_bp = Blueprint('user_authentication', __name__)
 
-
+# Routes for refreshing JWT tokens
 @user_auth_bp.route('/refresh', methods=['POST'])
 @jwt_required(refresh=True)
 def refresh():
@@ -22,6 +22,7 @@ def refresh():
     new_token = create_access_token(identity=current_user)
     return jsonify(access_token=new_token), 200
 
+# Route for user signup
 @user_auth_bp.route('/signup/user', methods=['POST'])
 def user_signup():
     try:
@@ -61,6 +62,7 @@ def user_signup():
         db.session.rollback()
         return jsonify({"msg": f"Error during signup: {str(e)}"}), 500
 
+# Route for user login
 @user_auth_bp.route('/login/user', methods=['POST'])
 def user_login():
     try:
@@ -115,6 +117,7 @@ def user_login():
     except Exception as e:
         return jsonify({"msg": f"An error occurred during login: {str(e)}"}), 500
 
+# Route for user logout
 @user_auth_bp.route('/logout/user', methods=['POST'])
 @jwt_required()
 def user_logout():
@@ -149,11 +152,12 @@ def user_logout():
     except Exception as e:
         return jsonify({"msg": f"Error during logout: {str(e)}"}), 500
 
-
+# Function to generate a random OTP
 def generate_otp(length=6):
     digits = string.digits
     return ''.join(random.choice(digits) for _ in range(length))
 
+# Route for user password recovery
 @user_auth_bp.route('/forgot_password/user', methods=['POST'])
 def user_forgot_password_user():
     try:
@@ -224,6 +228,7 @@ def user_forgot_password_user():
     except Exception as e:
         return jsonify({"msg": f"Error generating OTP: {str(e)}"}), 500
 
+# Route for user password reset using OTP
 @user_auth_bp.route('/reset_password/user', methods=['POST'])
 def user_reset_password_user():
     try:

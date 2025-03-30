@@ -6,6 +6,7 @@ from api_utils import get_current_user
 
 admin_question_bp = Blueprint('admin_question', __name__)
 
+# Routes for getting, creating, updating, and deleting questions
 @admin_question_bp.route('/quizzes/<int:quiz_id>/questions', methods=['GET'])
 @jwt_required()
 @admin_required()

@@ -6,6 +6,7 @@ from datetime import datetime
 
 user_dashboard_bp = Blueprint('user_dashboard', __name__)
 
+# Route for user dashboard
 @user_dashboard_bp.route('/dashboard/user', methods=['GET'])
 @jwt_required()
 @user_required()

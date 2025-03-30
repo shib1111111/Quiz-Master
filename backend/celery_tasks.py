@@ -19,7 +19,10 @@ load_dotenv()
 # Load the API key from the .env file
 SENDER_MAIL = str(os.getenv("SENDER_MAIL"))
 IST = pytz.timezone("Asia/Kolkata")
+
 # Triggered Tasks
+
+# Send OTP for Reset Password
 @celery_app.task(name="send_reset_password_email")
 def send_reset_password_email(recipient_email, one_time_password="default_otp"):
     
@@ -37,6 +40,7 @@ def send_reset_password_email(recipient_email, one_time_password="default_otp"):
     mail.send(email_message)
     print(f"Password reset email sent to {recipient_email}")
     
+# Send Reset Password Success Email
 @celery_app.task(name="send_reset_password_success_email")
 def send_reset_password_success_email(recipient_email):
     
@@ -53,7 +57,8 @@ def send_reset_password_success_email(recipient_email):
     # Send the email
     mail.send(email_message)
     print(f"Password reset success email sent to {recipient_email}")
-    
+   
+# Send Payment Status Email 
 @celery_app.task(name="send_payment_status_email")
 def send_payment_status_email(recipient_email, quiz_ids, payment_status, transaction_id):
     html_content = render_template(
@@ -74,6 +79,7 @@ def send_payment_status_email(recipient_email, quiz_ids, payment_status, transac
     mail.send(email_message)
     print(f"Payment status email sent to {recipient_email} for transaction {transaction_id}")
     
+# Send Exam Status Email
 @celery_app.task(name="send_exam_status_email")
 def send_exam_status_email(recipient_email, quiz_id, attempt_id, status, score_details):
     html_content = render_template(
@@ -436,7 +442,7 @@ def export_all_users_quiz_data_to_csv(admin_id, admin_email):
 # Periodic Task Scheduling
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    # Daily Reminder at 9 AM IST
+    # Gmail Daily Reminder at 9 AM IST
     sender.add_periodic_task(
         crontab(hour=9, minute=0),
         # crontab(minute='*/1'),  # Runs every minute for testing only
@@ -444,7 +450,7 @@ def setup_periodic_tasks(sender, **kwargs):
         name="daily-reminder"
     )
 
-    # Monthly Report on 1st of every month at 9 AM IST
+    # Gmail Monthly Report on 1st of every month at 9 AM IST
     sender.add_periodic_task(
         crontab(day_of_month=1, hour=9, minute=0),
         # crontab(minute='*/1'),  # Runs every minute for testing only
@@ -469,7 +475,7 @@ def setup_periodic_tasks(sender, **kwargs):
         send_new_quiz_google_chat_notification.s(),
         name="new-quiz-google-chat-notification-evening"
     )
-    
+    # Google Chat Notifications for Quiz Endorsements (once daily at 9 AM IST)
     sender.add_periodic_task(
         crontab(hour=9, minute=0),
         # crontab(minute='*/1'),  # Runs every minute for testing only

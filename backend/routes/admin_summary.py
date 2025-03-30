@@ -7,6 +7,7 @@ import pytz
 
 admin_summary_bp = Blueprint('admin_summary', __name__)
 
+# Route to get admin summary data
 @admin_summary_bp.route('/dashboard/admin/summary', methods=['GET'])
 @jwt_required()
 @admin_required()
@@ -121,6 +122,7 @@ def get_admin_summary():
     except Exception as e:
         return jsonify({'msg': f'Error fetching admin summary: {str(e)}'}), 500
     
+# Route to trigger export of all users' quiz data
 @admin_summary_bp.route('/dashboard/admin/export_all_users_quiz_data', methods=['POST'])
 @jwt_required()
 @admin_required()

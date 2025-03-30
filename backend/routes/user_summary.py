@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 user_summary_bp = Blueprint('user_summary', __name__)
 
-
+# Route to get user summary data
 @user_summary_bp.route('/dashboard/user/scores', methods=['GET'])
 @jwt_required()
 @user_required()
@@ -107,7 +107,7 @@ def get_user_scores():
     except Exception as e:
         return jsonify({'msg': f'Error fetching scores: {str(e)}'}), 500
 
-
+# Route to get user summary data for quiz attempts
 @user_summary_bp.route('/dashboard/user/export_quiz_attempts', methods=['POST'])
 @jwt_required()
 @user_required()

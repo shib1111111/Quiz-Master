@@ -6,6 +6,7 @@ from api_utils import user_required, get_current_user
 
 user_score_bp = Blueprint('user_score', __name__)
 
+# Route to get user scores and performance metrics
 @user_score_bp.route('/dashboard/user/scores', methods=['GET'])
 @jwt_required()
 @user_required()
@@ -105,7 +106,7 @@ def get_user_scores():
     except Exception as e:
         return jsonify({'msg': f'Error fetching scores: {str(e)}'}), 500
 
-
+# Route to get quiz attempts for a specific quiz
 @user_score_bp.route('/dashboard/user/quiz/<int:quiz_id>/attempts', methods=['GET'])
 @jwt_required()
 @user_required()

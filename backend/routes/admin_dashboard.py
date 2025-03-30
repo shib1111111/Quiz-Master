@@ -9,6 +9,7 @@ from datetime import datetime
 
 admin_dashboard_bp = Blueprint('admin_dashboard', __name__)
 
+# Route for admin dashboard
 @admin_dashboard_bp.route('/dashboard/admin', methods=['GET'])
 @jwt_required()
 @admin_required()
@@ -16,7 +17,7 @@ def admin_dashboard():
     claims = get_jwt()
     return jsonify({"msg": f"Welcome {claims['username']}"}), 200
 
-
+# Route to get all data for admin dashboard
 @admin_dashboard_bp.route('/admin/all-data', methods=['GET'])
 @jwt_required()
 @admin_required()
