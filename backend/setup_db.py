@@ -8,8 +8,8 @@ with app.app_context():
     db.create_all()
 
     # Create an initial admin user
-    admin_username = "21f1001520"
-    admin_email = "21f1001520@ds.study.iitm.ac.in"
+    admin_username = "Admin"
+    admin_email = "Admin@gmail.com"
     admin_password = "123456"  
     admin_full_name = "Admin One"
 
