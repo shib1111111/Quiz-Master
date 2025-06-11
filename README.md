@@ -128,3 +128,14 @@ Follow these steps to set up and run Quiz Master locally:
 
 ## Conclusion
 Quiz Master is a professional SPA with secure authentication, proctored quizzes, and optimized performance. It’s a complete solution for exam preparation and administration.
+
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions, collaborations, or further details, please reach out:
+- **Name:** Shib Kumar  
+- **Email:** [shibkumarsaraf05@gmail.com](mailto:shibkumarsaraf05@gmail.com)  
+- **GitHub:** [@shib1111111](https://github.com/shib1111111)
